@@ -1,0 +1,27 @@
+.side-drawer {
+  width: 300px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 20;
+  background: yellow;
+}
+
+.slide-in-left-enter {
+  transform: translateX(-100%);
+}
+
+.slide-in-left-enter-active {
+  transform: translateX(0);
+  transition: 500ms;
+}
+
+.slide-in-left-exit {
+  transform: translateX(0);
+}
+
+.slide-in-left-exit-active {
+  transform: translateX(-100%);
+  transition: 500ms;
+}
+
