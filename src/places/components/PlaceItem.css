@@ -1,0 +1,38 @@
+.place-item {
+  flex: 0 0 33.33%;
+  max-width: 33.33%;
+  padding: 1.5rem;
+}
+
+.place-item__image > img {
+  display: block;
+  max-width: 100%;
+}
+
+.place-item__content {
+  padding: 0 !important;
+}
+
+.place-item__info {
+  padding: 1.5rem;
+}
+
+.place-item__info > h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.place-item__info > h3 {
+  margin: 0.5rem 0;
+  color: #707070;
+}
+
+.place-item__actions {
+  display: flex;
+  padding: 0 1.5rem 1.5rem;
+}
+
+.place-item__actions > .button:not(:last-child) {
+  margin-right: 1rem;
+}
+

@@ -1,0 +1,10 @@
+.place-list {
+  width: 100%;
+  max-width: 150rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1.5rem auto;
+  list-style: none;
+}
+

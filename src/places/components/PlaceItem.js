@@ -14,7 +14,11 @@ const PlaceItem = ({
   coordinates,
 }) => {
   const [showMap, setShowMap] = useState(false);
-  const openMapHandler = () => setShowMap(true);
+  const openMapHandler = () => {
+    window.scrollTo(0, 0);
+    setShowMap(true);
+  };
+
   const closeMapHandler = () => setShowMap(false);
   return (
     <>
@@ -24,7 +28,7 @@ const PlaceItem = ({
         header={address}
         contentClass="place-item__modal-content"
         footerClass="place-item__modal-actions"
-        footer={<button onClick={closeMapHandler}>CLOSE</button>}
+        footer={<Button onClick={closeMapHandler}>CLOSE</Button>}
       >
         <div className="map-container">
           <Map center={coordinates} zoom={16} />

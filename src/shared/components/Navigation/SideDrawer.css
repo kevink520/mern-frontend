@@ -1,10 +1,30 @@
-.side-drawer {
-  width: 300px;
+#drawer-hook {
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 20;
-  background: yellow;
+  z-index: 30;
+}
+
+.side-drawer {
+  width: 300px;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 30;
+  padding: 3rem 1rem;
+  background: #3e2723;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+.side-drawer .nav-links {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.side-drawer .nav-links a {
+  color: #fff;
 }
 
 .slide-in-left-enter {

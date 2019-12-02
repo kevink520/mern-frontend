@@ -32,10 +32,12 @@ const Input = ({
   errorText,
   validators,
   onInput,
+  initialValue,
+  initialValid,
 }) => {
   const [inputState, dispatch] = useReducer(inputReducer, {
-    value: '',
-    isValid: false,
+    value: initialValue || '',
+    isValid: initialValid || false,
     isTouched: false,
   });
 
@@ -79,7 +81,7 @@ const Input = ({
       <label htmlFor={id}>{label}</label>
       {element}
       {!inputState.isValid && inputState.isTouched &&
-      <p className="">{errorText}</p>}
+      <p className="error-text">{errorText}</p>}
     </div>
   );
 };

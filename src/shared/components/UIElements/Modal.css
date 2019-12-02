@@ -1,0 +1,38 @@
+#modal-hook {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 25;
+}
+
+.modal {
+  position: absolute;
+  left: 50vw;
+  top: 3rem;
+  transform: translateX(-50%);
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-enter-active {
+  opacity: 1;
+  transition: 0.5s opacity;
+}
+
+.modal-exit {
+  opacity: 1;
+}
+
+.modal-exit-active {
+  opacity: 0;
+  transition: 0.5s opacity;
+}
+
+.modal__header,
+.modal__footer {
+  padding: 1rem 1.5rem;
+}

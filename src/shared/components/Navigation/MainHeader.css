@@ -1,0 +1,41 @@
+.main-header {
+  width: 100%;
+  height: 6rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem 0 10rem;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+
+.main-navigation__menu-button {
+  position: absolute;
+  left: 3rem;
+  top: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 3rem;
+  height: 2.4rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.main-navigation__menu-button > span {
+  width: 3rem;
+  height: 0.4rem;
+  background: #1b5e20;
+}
+
+.main-navigation__title > a {
+  font-weight: 400;
+  text-decoration: none;
+  color: #795548;
+}
+

@@ -2,7 +2,7 @@ import React from 'react';
 import './MainHeader.css';
 
 const MainHeader = ({ children }) => (
-  <header clsssName="main-header">
+  <header className="main-header">
     {children}
   </header>
 );

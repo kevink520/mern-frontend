@@ -6,7 +6,7 @@ const Avatar = ({ className, style, image, alt, width }) => (
     <img
       src={image}
       alt={alt}
-      style={{ width, height: width }}
+      style={{ width, height: width, ...style }}
     />
   </div>
 );

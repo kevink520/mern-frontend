@@ -1,0 +1,31 @@
+.form-control {
+  margin-bottom: 1.5rem;
+}
+
+.form-control > label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.form-control > input,
+.form-control > textarea {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+}
+
+.form-control > input {
+  height: 4rem;
+}
+
+.form-control > textarea {
+  height: 8rem;
+}
+
+.error-text {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #b71c1c;
+}
+

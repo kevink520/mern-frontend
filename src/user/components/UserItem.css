@@ -1,4 +1,24 @@
+.user-item {
+  width: 50rem;
+  margin-bottom: 3rem;
+}
+
 .user-item a {
   display: flex;
+  align-items: center;
+}
+
+.user-item__info > h2 {
+  font-size: 2rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #3e2723;
+}
+
+.user-item__info > h3 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #1b5e20;
 }
 
