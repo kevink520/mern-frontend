@@ -6,6 +6,8 @@
 }
 
 .modal {
+  width: 50rem;
+  maxWidth: 100%;
   position: absolute;
   left: 50vw;
   top: 3rem;

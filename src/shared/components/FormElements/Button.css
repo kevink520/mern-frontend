@@ -15,13 +15,13 @@
   color: #fff;
 }
 
-.button.danger {
+.button--danger {
   border-color: #b71c1c;
   color: #b71c1c;
 }
 
-.button.danger:hover,
-.button.danger:focus {
+.button--danger:hover,
+.button-0danger:focus {
   background: #b71c1c;
 }
 
