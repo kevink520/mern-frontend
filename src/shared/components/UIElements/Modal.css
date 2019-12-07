@@ -6,8 +6,6 @@
 }
 
 .modal {
-  width: 50rem;
-  maxWidth: 100%;
   position: absolute;
   left: 50vw;
   top: 3rem;
@@ -38,3 +36,4 @@
 .modal__footer {
   padding: 1rem 1.5rem;
 }
+

@@ -2,12 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Button.css';
 
-const Button = ({ href, to, exact, type, onClick, disabled, size, inverse, danger, children }) => {
+const Button = ({ href, to, exact, type, onClick, disabled, size, inverse, danger, children, style }) => {
   if (href) {
     return <a
       className={`button button--${size || 'default'} ${inverse &&
       'button--inverse'} ${danger && 'button--danger'}`} 
       href={href}
+      style={style}
     >
       {children}
     </a>;
@@ -19,6 +20,7 @@ const Button = ({ href, to, exact, type, onClick, disabled, size, inverse, dange
       exact={exact}
       className={`button button--${size || 'default'} ${inverse &&
         'button--inverse'} ${danger && 'button--danger'}`}
+      style={style}
     >
       {children}
     </Link>;
@@ -30,6 +32,7 @@ const Button = ({ href, to, exact, type, onClick, disabled, size, inverse, dange
     type={type}
     onClick={onClick}
     disabled={disabled}
+    style={style}
   >
     {children}
   </button>;

@@ -21,7 +21,11 @@ const PlaceItem = ({
   };
 
   const closeMapHandler = () => setShowMap(false);
-  const showDeleteWarningHandler = () => setShowConfirmModal(true);
+  const showDeleteWarningHandler = () => {
+    window.scrollTo(0, 0);
+    setShowConfirmModal(true);
+  };
+
   const cancelDeleteHandler = () => setShowConfirmModal(false);
   const confirmDeleteHandler = () => {
     console.log('Deleting...');
@@ -43,18 +47,17 @@ const PlaceItem = ({
       </Modal>
       <Modal
         show={showConfirmModal}
-        style={{ width: '50rem', maxWidth: '100%' }}
         onCancel={cancelDeleteHandler}
         header="Are you sure?"
         footerClass="place-item__modal-actions"
         footer={(
           <>
-            <Button inverse onClick={cancelDeleteHandler}>CANCEL</Button>
+            <Button inverse info onClick={cancelDeleteHandler} style={{ marginRight: '1rem' }}>CANCEL</Button>
             <Button danger onClick={confirmDeleteHandler}>DELETE</Button>
           </>
         )}
       >
-        <p style={{ width: '50rem', maxWidth: '100%' }}>Do you want to proceed and delete this place? Please note that this can't be undone thereafer.</p>
+        <p style={{ width: '50rem', maxWidth: '100vw', padding: '1rem 1.5rem' }}>Do you want to proceed and delete this place? Please note that this can't be undone thereafer.</p>
       </Modal>
       <li className="place-item">
         <Card className="place-item__content">

@@ -7,6 +7,7 @@
   letter-spacing: 0.1em;
   color: #1b5e20;
   transition: 0.35s;
+  cursor: pointer;
 }
 
 .button:hover,
@@ -21,7 +22,17 @@
 }
 
 .button--danger:hover,
-.button-0danger:focus {
+.button-danger:focus {
   background: #b71c1c;
+}
+
+.button--info {
+  border-color: #f57f17;
+  color: #f57f17;
+}
+
+.button--info:hover,
+.button--info:focus {
+  background: #f57f17;
 }
 
