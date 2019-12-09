@@ -1,0 +1,97 @@
+import React, { useState, useContext } from 'react';
+import Input from '../../shared/components/FormElements/Input';
+import Button from '../../shared/components/FormElements/Button';
+import { useForm } from '../../shared/hooks/form-hook.js';
+import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH, VALIDATOR_EMAIL } from '../../shared/util/validators';
+import { AuthContext } from '../../shared/context/auth-context';
+import './Auth.css';
+
+const Auth = (props) => {
+  const [isLoginMode, setIsLoginMode] = useState(true);
+  const { login } = useContext(AuthContext);
+  const [formState, inputHandler, setFormData] = useForm({
+    email: {
+      value: '',
+      isValid: false,
+    },
+    password: {
+      value: '',
+      isValid: false,
+    },
+  },
+  false);
+
+  const authSubmitHandler = event => {
+    event.preventDefault();
+    login();
+  };
+
+  const switchModeHandler = () => {
+    if (!isLoginMode) {
+      setFormData({
+        ...formState.inputs,
+        name: undefined,
+      }, formState.inputs.email.isValid && formState.inputs.password.isValid);
+    } else {
+      setFormData({
+        ...formState.inputs,
+        name: {
+          value: '',
+          isValid: false,
+        },
+      }, false);
+    }
+
+    setIsLoginMode(prevMode => !prevMode);
+  };
+
+  return (
+    <form
+      className="auth form"
+      onSubmit={authSubmitHandler}
+    >
+      <h2>Sign-in Required</h2>
+      {!isLoginMode &&
+      <Input
+        id="name"
+        element="input"
+        type="text"
+        label="Your Name"
+        validators={[VALIDATOR_REQUIRE()]}
+        errorText="Please enter your name."
+        onInput={inputHandler}
+      />}
+      <Input
+        id="email"
+        element="input"
+        type="email"
+        label="Your Email"
+        validators={[VALIDATOR_EMAIL()]}
+        errorText="Please enter a valid email address."
+        onInput={inputHandler}
+      />
+      <Input
+        id="password" 
+        element="input"
+        type="password"
+        label="Password"
+        validators={[VALIDATOR_MINLENGTH(5)]}
+        errorText="Please enter a valid password, at least 5 characters."
+        onInput={inputHandler}
+      />
+      <Button
+        disabled={!formState.isValid}
+        type="submit"
+      >{isLoginMode ? 'Sign In' : 'Sign Up'}</Button>
+      <div style={{ marginBottom: 15 }} />
+      <Button
+        info
+        type="button"
+        onClick={switchModeHandler}
+      >Switch to {isLoginMode ? 'Sign Up' : 'Sign In'}</Button>
+    </form>
+  );
+};
+
+export default Auth;
+

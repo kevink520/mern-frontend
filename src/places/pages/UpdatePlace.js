@@ -82,7 +82,7 @@ const UpdatePlace = props => {
   if (isLoading) {
     return (
       <div className="center">
-        <h2>Losding...</h2>
+        <h2>Loading...</h2>
       </div>
     );
   }
