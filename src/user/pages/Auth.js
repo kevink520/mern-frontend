@@ -31,7 +31,6 @@ const Auth = (props) => {
 
     } else {
       setIsLoading(true);
-      console.log(formState)
       try {
         const response = await fetch('http://localhost:5000/api/users/signup', {
           method: 'POST',
