@@ -29,7 +29,7 @@ const NewPlace = () => {
   const placeSubmitHandler = useCallback(async event => {
     event.preventDefault();
     try {
-      const res = await sendRequest(
+      await sendRequest(
         'http://localhost:5000/api/places',
         'POST',
         JSON.stringify({
@@ -40,12 +40,12 @@ const NewPlace = () => {
         }),
         { 'Content-Type': 'application/json' }
       );
-      console.log('res', res)
+      
       if (error) {
         return;
       }
 
-      //history.push('/');
+      history.push('/');
     } catch (err) {}
   }, [sendRequest, formState, userId, error, history]);
 
