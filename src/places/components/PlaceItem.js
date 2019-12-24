@@ -3,7 +3,10 @@ import Modal from '../../shared/components/UIElements/Modal';
 import Map from '../../shared/components/UIElements/Map';
 import Card from '../../shared/components/UIElements/Card';
 import Button from '../../shared/components/FormElements/Button';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../../shared/context/auth-context';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 import './PlaceItem.css';
 
 const PlaceItem = ({
@@ -13,10 +16,13 @@ const PlaceItem = ({
   address,
   description,
   coordinates,
+  creatorId,
+  onDelete,
 }) => {
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const { isLoggedIn } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const openMapHandler = () => {
     window.scrollTo(0, 0);
     setShowMap(true);
@@ -29,12 +35,24 @@ const PlaceItem = ({
   };
 
   const cancelDeleteHandler = () => setShowConfirmModal(false);
-  const confirmDeleteHandler = () => {
-    console.log('Deleting...');
+  const confirmDeleteHandler = async () => {
+    setShowConfirmModal(false);
+    try {
+      await sendRequest(
+        `http://localhost:5000/api/places/${id}`,
+        'DELETE'
+      );
+
+      onDelete(id);
+    } catch (err) {}
   };
 
   return (
     <>
+      <ErrorModal
+        error={error}
+        onClear={clearError}
+      />
       <Modal
         show={showMap}
         onCancel={closeMapHandler}
@@ -63,6 +81,8 @@ const PlaceItem = ({
       </Modal>
       <li className="place-item">
         <Card className="place-item__content">
+          {isLoading &&
+          <LoadingSpinner asOverlay />}
           <div className="place-item__image">
             <img src={image} alt={title} />
           </div>
@@ -73,7 +93,7 @@ const PlaceItem = ({
           </div>
           <div className="place-item__actions">
             <Button onClick={openMapHandler} inverse>VIEW ON MAP</Button>
-            {isLoggedIn && (
+            {userId === creatorId && (
             <>
               <Button to={`/places/${id}`}>EDIT</Button>
               <Button danger onClick={showDeleteWarningHandler}>DELETE</Button>

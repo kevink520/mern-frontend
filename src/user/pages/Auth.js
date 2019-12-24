@@ -3,15 +3,14 @@ import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
-import { useForm } from '../../shared/hooks/form-hook.js';
+import { useForm } from '../../shared/hooks/form-hook';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH, VALIDATOR_EMAIL } from '../../shared/util/validators';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
 import './Auth.css';
 
 const Auth = (props) => {
   const [isLoginMode, setIsLoginMode] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();
   const { login } = useContext(AuthContext);
   const [formState, inputHandler, setFormData] = useForm({
     email: {
@@ -25,37 +24,38 @@ const Auth = (props) => {
   },
   false);
 
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const authSubmitHandler = async event => {
     event.preventDefault();
     if (isLoginMode) {
-
-    } else {
-      setIsLoading(true);
       try {
-        const response = await fetch('http://localhost:5000/api/users/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
+        const { user } = await sendRequest(
+          'http://localhost:5000/api/users/login',
+          'POST',
+          JSON.stringify({
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value,
+          }),
+          { 'Content-Type': 'application/json' }
+        );
+ 
+        login(user.id);
+      } catch (err) {}
+    } else {
+      try {
+        const { user } = await sendRequest(
+          'http://localhost:5000/api/users/signup',
+          'POST',
+          JSON.stringify({
             name: formState.inputs.name.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
-        });
+          { 'Content-Type': 'application/json' },
+        );
 
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(responseData.message);
-        }
-
-        setIsLoading(false);
-        login();
-      } catch (err) {
-        console.log(err);
-        setError(err.message || 'Something went wrong. Please try again.');
-        setIsLoading(false);
-      }
+        login(user.id);
+      } catch (err) {}
     }
   };
 
@@ -78,13 +78,9 @@ const Auth = (props) => {
     setIsLoginMode(prevMode => !prevMode);
   };
 
-  const errorHandler = () => {
-    setError(null);
-  };
-
   return (
     <>
-      {error && <ErrorModal error={error} onClear={errorHandler} />}
+      {error && <ErrorModal error={error} onClear={clearError} />}
       {isLoading && <LoadingSpinner asOverlay />}
       <form
         className="auth form"
@@ -115,8 +111,8 @@ const Auth = (props) => {
           element="input"
           type="password"
           label="Password"
-          validators={[VALIDATOR_MINLENGTH(5)]}
-          errorText="Please enter a valid password, at least 5 characters."
+          validators={[VALIDATOR_MINLENGTH(6)]}
+          errorText="Please enter a valid password, at least 6 characters."
           onInput={inputHandler}
         />
         <Button
