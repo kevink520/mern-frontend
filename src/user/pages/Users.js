@@ -18,6 +18,7 @@ const Users = () => {
     fetchUsers();
   }, [sendRequest]);
 
+  //console.log('loadedUsers', loadedUsers)
   return (
     <>
       <ErrorModal error={error} onClear={clearError} />

@@ -21,11 +21,13 @@ export const useHttpClient = () => {
       }
 
       const responseData = await response.json();
+      setIsLoading(false);
       return responseData;
     } catch (err) {
-      setError(err.message);
+      setError(err.message)
+      setIsLoading(false);
     }
-  }, []);
+  }, [setIsLoading, setError]);
 
   const clearError = () => {
     setError(null);

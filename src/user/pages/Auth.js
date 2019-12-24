@@ -80,7 +80,7 @@ const Auth = (props) => {
 
   return (
     <>
-      {error && <ErrorModal error={error} onClear={clearError} />}
+      <ErrorModal error={error} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
       <form
         className="auth form"

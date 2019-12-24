@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
@@ -26,24 +26,28 @@ const NewPlace = () => {
 
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const history = useHistory();
-  const placeSubmitHandler = async event => {
+  const placeSubmitHandler = useCallback(async event => {
     event.preventDefault();
     try {
-      await sendRequest(
-        'http://localhost/api/places',
+      const res = await sendRequest(
+        'http://localhost:5000/api/places',
         'POST',
-        {
+        JSON.stringify({
           title: formState.inputs.title.value,
           description: formState.inputs.description.value,
           address: formState.inputs.address.value,
           creator: userId,
-        },
+        }),
         { 'Content-Type': 'application/json' }
       );
+      console.log('res', res)
+      if (error) {
+        return;
+      }
 
-      history.push('/');
+      //history.push('/');
     } catch (err) {}
-  };
+  }, [sendRequest, formState, userId, error, history]);
 
   return (
     <>
