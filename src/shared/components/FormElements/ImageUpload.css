@@ -1,0 +1,9 @@
+.image-upload__preview {
+  margin-bottom: 10px;
+}
+
+.image-upload__preview > img {
+  display: block;
+  max-width: 62%;
+}
+
