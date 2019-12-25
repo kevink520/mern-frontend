@@ -23,7 +23,8 @@
   align-items: flex-start;
 }
 
-.side-drawer .nav-links a {
+.side-drawer .nav-links a,
+.side-drawer .nav-links .info {
   color: #fff;
 }
 

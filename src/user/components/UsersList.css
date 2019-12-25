@@ -3,9 +3,10 @@
   flex-direction: column;
   align-items: center;
   margin-top: 3rem;
+  list-style: none;
 }
 
-.users-list {
-  list-style: none;
+.no-results {
+   margin-top: 3rem;
 }
 

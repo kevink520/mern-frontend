@@ -1,6 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import Input from '../../shared/components/FormElements/Input';
+import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 import Button from '../../shared/components/FormElements/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
@@ -21,6 +22,14 @@ const NewPlace = () => {
       value: '',
       isValid: false,
     },
+    address: {
+      value: '',
+      isValid: false,
+    },
+    image: {
+      value: null,
+      isValid: false,
+    },
   },
   false);
 
@@ -29,16 +38,16 @@ const NewPlace = () => {
   const placeSubmitHandler = useCallback(async event => {
     event.preventDefault();
     try {
+      const formData = new FormData();
+      formData.append('title', formState.inputs.title.value);
+      formData.append('image', formState.inputs.image.value);
+      formData.append('description', formState.inputs.description.value);
+      formData.append('address', formState.inputs.address.value);
+      formData.append('creator', userId);
       await sendRequest(
         'http://localhost:5000/api/places',
         'POST',
-        JSON.stringify({
-          title: formState.inputs.title.value,
-          description: formState.inputs.description.value,
-          address: formState.inputs.address.value,
-          creator: userId,
-        }),
-        { 'Content-Type': 'application/json' }
+        formData
       );
       
       if (error) {
@@ -62,6 +71,11 @@ const NewPlace = () => {
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Please enter a valid title."
           onInput={inputHandler}
+        />
+        <ImageUpload
+          id="image"
+          onInput={inputHandler}
+          errorText="Please upload an image."
         />
         <Input
           id="description"
