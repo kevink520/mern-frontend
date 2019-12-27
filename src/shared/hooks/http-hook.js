@@ -17,14 +17,24 @@ export const useHttpClient = () => {
       });
 
       if (!response.ok) {
-        throw new Error(response.message);
+        throw response;
       }
 
       const responseData = await response.json();
       setIsLoading(false);
       return responseData;
     } catch (err) {
-      setError(err.message)
+      if (err.text) {
+        try {
+          const error = await err.text();
+          setError(error);
+        } catch (err) {
+          setError(err);
+        }
+      } else {
+        setError(err.message || 'Sorry, there was an error');
+      }
+
       setIsLoading(false);
     }
   }, [setIsLoading, setError]);

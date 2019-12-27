@@ -61,7 +61,7 @@ const ImageUpload = ({ onInput, id, center, errorText }) => {
           onClick={pickImageHandler}
         >Pick Image</Button>
       </div>
-      {!isValid && <p>{errorText}</p>}
+      {!isValid && <p className="error-text">{errorText}</p>}
     </div>
   );
 };

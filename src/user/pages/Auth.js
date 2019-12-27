@@ -30,7 +30,7 @@ const Auth = (props) => {
     event.preventDefault();
     if (isLoginMode) {
       try {
-        const { user } = await sendRequest(
+        const { userId, token } = await sendRequest(
           'http://localhost:5000/api/users/login',
           'POST',
           JSON.stringify({
@@ -40,7 +40,7 @@ const Auth = (props) => {
           { 'Content-Type': 'application/json' }
         );
  
-        login(user.id);
+        login(userId, token);
       } catch (err) {}
     } else {
       try {
@@ -49,13 +49,13 @@ const Auth = (props) => {
         formData.append('email', formState.inputs.email.value);
         formData.append('password', formState.inputs.password.value);
         formData.append('image', formState.inputs.image.value);
-        const { user } = await sendRequest(
+        const { userId, token } = await sendRequest(
           'http://localhost:5000/api/users/signup',
           'POST',
           formData,
         );
 
-        login(user.id);
+        login(userId, token);
       } catch (err) {}
     }
   };

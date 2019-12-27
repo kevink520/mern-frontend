@@ -13,7 +13,7 @@ import './PlaceForm.css';
 
 const UpdatePlace = props => {
   const [loadedPlace, setLoadedPlace] = useState();
-  const { userId } = useContext(AuthContext);
+  const { userId, token } = useContext(AuthContext);
   const { placeId } = useParams();
   const history = useHistory();
   const [formState, inputHandler, setFormData] = useForm({
@@ -52,7 +52,7 @@ const UpdatePlace = props => {
         },
       }, true);
     }
-  }, [setFormData, loadedPlace]);
+   }, [setFormData, loadedPlace]);
 
   const placeUpdateSubmitHandler = async event => {
     event.preventDefault();
@@ -64,7 +64,10 @@ const UpdatePlace = props => {
           title: formState.inputs.title.value,
           description: formState.inputs.description.value,
         }),
-        { 'Content-Type': 'application/json' }
+        {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        }
       );
 
       history.push(`/${userId}/places`);
