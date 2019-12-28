@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { useAuth } from './shared/hooks/auth-hook';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
-import Users from './user/pages/Users';
-import UserPlaces from './places/pages/UserPlaces';
-import NewPlace from './places/pages/NewPlace';
-import UpdatePlace from './places/pages/UpdatePlace';
-import Auth from './user/pages/Auth';
 import { AuthContext } from './shared/context/auth-context';
+import LoadingSpinner from './shared/components/UIElements/LoadingSpinner';
 import './App.css';
+
+const Users = lazy(() => import('./user/pages/Users'));
+const UserPlaces = lazy(() => import('./places/pages/UserPlaces'));
+const NewPlace = lazy(() => import('./places/pages/NewPlace'));
+const UpdatePlace = lazy(() => import('./places/pages/UpdatePlace'));
+const Auth = lazy(() => import('./user/pages/Auth'));
 
 const App = () => {
   const { token, login, logout, userId } = useAuth();
@@ -59,7 +61,9 @@ const App = () => {
       <Router>
         <MainNavigation />
         <main> 
-          {routes}
+          <Suspense fallback={<LoadingSpinner asOverlay />}>
+            {routes}9
+          </Suspense>
         </main>
       </Router>
     </AuthContext.Provider>
