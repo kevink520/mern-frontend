@@ -1,10 +1,26 @@
 .place-list {
-  width: 100%;
-  max-width: 150rem;
+  max-width: 156rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 1.5rem auto;
-  list-style: none;
+  margin: 0 auto;
+  width: auto;
+}
+.place-list__column {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-clip: padding-box;
+}
+ 
+.place-list__column > .place-item {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 48em) {
+  .place-list__column {
+    flex: 100% !important;
+  }
 }
 

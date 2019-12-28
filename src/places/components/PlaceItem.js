@@ -39,7 +39,7 @@ const PlaceItem = ({
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        `http://localhost:5000/api/places/${id}`,
+        `${REACT_APP_BACKEND_URL}/places/${id}`,
         'DELETE',
         null,
         { Authorization: `Bearer ${token}` }
@@ -81,12 +81,12 @@ const PlaceItem = ({
       >
         <p style={{ width: '50rem', maxWidth: '100vw', padding: '1rem 1.5rem' }}>Do you want to proceed and delete this place? Please note that this can't be undone thereafer.</p>
       </Modal>
-      <li className="place-item">
+      <div className="place-item">
         <Card className="place-item__content">
           {isLoading &&
           <LoadingSpinner asOverlay />}
           <div className="place-item__image">
-            <img src={`http://localhost:5000/${image}`} alt={title} />
+            <img src={image} alt={title} />
           </div>
           <div className="place-item__info">
             <h2>{title}</h2>
@@ -102,7 +102,7 @@ const PlaceItem = ({
             </>)}
           </div>
         </Card>
-      </li>
+      </div>
     </>
   );
 };

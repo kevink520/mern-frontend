@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PlaceList from '../components/PlaceList';
-import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+//import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import './UserPlaces.css';
@@ -13,7 +13,7 @@ const UserPlaces = () => {
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
-        const { places } = await sendRequest(`http://localhost:5000/api/places/user/${userId}`);
+        const { places } = await sendRequest(`${REACT_APP_BACKEND_URL}/places/user/${userId}`);
         setLoadedPlaces(places);
       } catch (err) {}
     };
@@ -27,10 +27,10 @@ const UserPlaces = () => {
 
   return (
     <>
-      <ErrorModal
+      {/*<ErrorModal
         error={error}
         onClear={clearError}
-      />
+      />*/}
       {isLoading &&
       <div className="center">
         <LoadingSpinner />

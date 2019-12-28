@@ -1,9 +1,3 @@
-.place-item {
-  flex: 0 0 33.33%;
-  max-width: 33.33%;
-  padding: 1.5rem;
-}
-
 .place-item__image > img {
   display: block;
   max-width: 100%;
