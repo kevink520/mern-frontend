@@ -44,7 +44,7 @@ const NewPlace = () => {
       formData.append('description', formState.inputs.description.value);
       formData.append('address', formState.inputs.address.value);
       await sendRequest(
-        `${REACT_APP_BACKEND_URL}/places`,
+        `${process.env.REACT_APP_BACKEND_URL}/places`,
         'POST',
         formData,
         { Authorization: `Bearer ${token}` }

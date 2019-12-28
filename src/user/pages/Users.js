@@ -10,7 +10,7 @@ const Users = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const { users } = await sendRequest(`${REACT_APP_BACKEND_URL}/users`);
+        const { users } = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/users`);
         setLoadedUsers(users);
       } catch (err) {}
     };

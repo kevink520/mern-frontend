@@ -13,7 +13,7 @@ const UserPlaces = () => {
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
-        const { places } = await sendRequest(`${REACT_APP_BACKEND_URL}/places/user/${userId}`);
+        const { places } = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/places/user/${userId}`);
         setLoadedPlaces(places);
       } catch (err) {}
     };
