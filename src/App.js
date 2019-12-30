@@ -62,7 +62,7 @@ const App = () => {
         <MainNavigation />
         <main> 
           <Suspense fallback={<LoadingSpinner asOverlay />}>
-            {routes}9
+            {routes}
           </Suspense>
         </main>
       </Router>

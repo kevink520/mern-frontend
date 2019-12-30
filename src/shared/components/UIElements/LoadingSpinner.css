@@ -7,6 +7,7 @@
   height: 100%;
   min-height: 100vh;
   background: rgba(0,0,0,0.75);
+  box-shadow: 0 7000px 0 rgba(0,0,0,0.75);
   display: flex;
   justify-content: center;
   align-items: center;
